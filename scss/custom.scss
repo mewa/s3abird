@@ -1,0 +1,12 @@
+$theme-colors: (
+    "primary": #4343cc,
+    "secondary": #7f85e5
+);
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+@import url('https://fonts.googleapis.com/css?family=Fredoka+One|Alfa+Slab+One|Ubuntu');
+
+html, body {
+    height: 100%;
+}
