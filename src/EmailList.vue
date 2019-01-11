@@ -11,7 +11,7 @@
     <tbody>
       <tr v-for="email in emails" @click="openEmail(email)">
         <td>{{ email.date.toLocaleString() }}</td>
-        <td class="ellipsized">{{ email.from.text }}</td>
+        <td>{{ email.from.text }}</td>
         <td>{{ email.subject }}</td>
       </tr>
     </tbody>
