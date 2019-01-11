@@ -1,16 +1,16 @@
 <template>
 <div>
-  <table class="table table-dark table-hover table-striped">
+  <table class="table table-hover table-striped table-sm">
     <thead>
       <tr>
-        <th>Date</th>
-        <th>From</th>
-        <th>Subject</th>
+        <th scope="col">Date</th>
+        <th scope="col">From</th>
+        <th scope="col">Subject</th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="email in emails" @click="openEmail(email)">
-        <td>{{ new Date(email.date).toUTCString() }}</td>
+        <td>{{ email.date.toLocaleString() }}</td>
         <td class="ellipsized">{{ email.from.text }}</td>
         <td>{{ email.subject }}</td>
       </tr>
@@ -70,11 +70,14 @@ module.exports = {
 }
 </script>
 
-<style>
-.ellipsized {
-    /* max-width: 200px; */
-    /* white-space: nowrap; */
-    /* overflow: hidden; */
-    /* text-overflow: ellipsis; */
+<style lang="scss" scoped>
+.table {
+    tbody tr {
+        cursor: pointer;
+    }
+
+    th:last-child {
+        width: 70%;
+    }
 }
 </style>
