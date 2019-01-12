@@ -7,9 +7,9 @@
   <table class="table table-hover table-responsive-lg">
     <tbody>
       <tr v-for="email in emails" @click="openEmail(email)">
-        <td class="wrap ellipsis">{{ email.from.text }}</td>
-        <td class="ellipsis">{{ email.subject }}</td>
-        <td class="wrap text-muted text-right"><small>{{ email.date.toLocaleString() }}</small></td>
+        <td class="text-truncate" style="max-width: 300px;">{{ email.from.text }}</td>
+        <td class="text-truncate" style="width: 100%; min-width: 300px; max-width: 1px;">{{ email.subject }}</td>
+        <td class="text-nowrap text-muted text-right"><small>{{ email.date.toLocaleString() }}</small></td>
       </tr>
     </tbody>
   </table>
@@ -92,17 +92,7 @@ module.exports = {
 
 <style lang="scss" scoped>
 .table {
-    white-space: nowrap;
     font-size: 0.875rem;
-
-    .ellipsis {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .wrap {
-        width: 1%;
-    }
 
     tbody tr {
         cursor: pointer;
