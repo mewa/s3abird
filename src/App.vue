@@ -1,7 +1,7 @@
 <template>
 <div>
   <Settings></Settings>
-  <div class="container bg-light mt-md-5 my-2 py-4 rounded">
+  <div class="container bg-light mt-md-5 my-2 py-2 rounded">
     <keep-alive include="EmailList">
       <router-view></router-view>
     </keep-alive>

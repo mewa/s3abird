@@ -1,21 +1,15 @@
 <template>
 <div>
+  <h4>Inbox</h4>
   <div class="alert alert-danger" v-if="error">
     Error: {{ error }}
   </div>
-  <table class="table table-hover table-sm table-responsive-md">
-    <thead>
-      <tr>
-        <th scope="col">Date</th>
-        <th scope="col">From</th>
-        <th scope="col">Subject</th>
-      </tr>
-    </thead>
+  <table class="table table-hover table-responsive-lg">
     <tbody>
       <tr v-for="email in emails" @click="openEmail(email)">
-        <td>{{ email.date.toLocaleString() }}</td>
-        <td>{{ email.from.text }}</td>
-        <td>{{ email.subject }}</td>
+        <td class="wrap ellipsis">{{ email.from.text }}</td>
+        <td class="ellipsis">{{ email.subject }}</td>
+        <td class="wrap text-muted text-right"><small>{{ email.date.toLocaleString() }}</small></td>
       </tr>
     </tbody>
   </table>
@@ -98,12 +92,24 @@ module.exports = {
 
 <style lang="scss" scoped>
 .table {
-    tbody tr {
-        cursor: pointer;
+    white-space: nowrap;
+    font-size: 0.875rem;
+
+    .ellipsis {
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
-    th:last-child {
-        width: 60%;
+    .wrap {
+        width: 1%;
+    }
+
+    tbody tr {
+        cursor: pointer;
+
+        .fill {
+            width: auto;
+        }
     }
 }
 </style>
