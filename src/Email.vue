@@ -10,6 +10,7 @@
       </tr>
     </tbody>
   </table>
+  <hr />
   <div class="my-2" v-html="email.html || email.textAsHtml"></div>
 </div>
 </template>
