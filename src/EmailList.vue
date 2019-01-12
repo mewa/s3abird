@@ -35,14 +35,13 @@ function loadEmails() {
 
     const s3 = new AWS.S3({ region: this.config.aws_region });
 
+    this.error = null;
+    this.emails = [];
+
     s3.listObjectsV2({
         Bucket: this.config.bucket
     }).promise()
-        .then(r => {
-            this.error = null;
-            this.emails = [];
-            return r.Contents;
-        })
+        .then(r => r.Contents)
         .then(r => r.sort((a, b) => b.LastModified - a.LastModified))
         .map(item => s3.getObject({
             Bucket: this.config.bucket,
