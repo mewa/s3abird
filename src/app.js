@@ -1,11 +1,13 @@
 const Vue = require('vue');
 const VueRouter = require('vue-router');
+const Vuex = require('vuex');
 
 const App = require('./App.vue');
 const Email = require('./Email.vue');
 const EmailList = require('./EmailList.vue');
 
 Vue.use(VueRouter);
+Vue.use(Vuex);
 
 const router = new VueRouter({
     mode: 'history',
@@ -16,14 +18,22 @@ const router = new VueRouter({
     ]
 });
 
+const store = new Vuex.Store({
+    state: {
+        config: JSON.parse(localStorage.config || null)
+    },
+    mutations: {
+        updateConfig(state, newConfig) {
+            state.config = newConfig;
+
+            localStorage.config = JSON.stringify(newConfig);
+        }
+    }
+});
+
 new Vue({
     router,
+    store,
     el: '#app',
-    render: h => h(App),
-    data: {
-        aws_region: 'redacted',
-        aws_access_key_id: 'redacted',
-        aws_secret_access_key: 'redacted',
-        bucket: 'redacted'
-    }
+    render: h => h(App)
 });

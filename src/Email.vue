@@ -29,16 +29,19 @@ module.exports = {
     computed: {
         key: function () {
             return Buffer.from(this.messageId, 'base64').toString()
+        },
+        config: function () {
+            return this.$store.state.config
         }
     },
     created: function () {
-        AWS.config.accessKeyId = this.$root.aws_access_key_id;
-        AWS.config.secretAccessKey = this.$root.aws_secret_access_key;
+        AWS.config.accessKeyId = this.config.aws_access_key_id;
+        AWS.config.secretAccessKey = this.config.aws_secret_access_key;
 
-        const s3 = new AWS.S3({ region: this.$root.aws_region });
+        const s3 = new AWS.S3({ region: this.config.aws_region });
 
         s3.getObject({
-            Bucket: this.$root.bucket,
+            Bucket: this.config.bucket,
             Key: this.key
         }).promise()
             .then(msg => {

@@ -26,6 +26,39 @@ const simpleParser = require('mailparser').simpleParser;
 
 AWS.config.setPromisesDependency(Promise);
 
+function loadEmails() {
+    AWS.config.accessKeyId = this.config.aws_access_key_id;
+    AWS.config.secretAccessKey = this.config.aws_secret_access_key;
+
+    const s3 = new AWS.S3({ region: this.config.aws_region });
+
+    s3.listObjectsV2({
+        Bucket: this.config.bucket
+    }).promise()
+        .then(r => {
+            this.error = null;
+            this.emails = [];
+            return r.Contents;
+        })
+        .then(r => r.sort((a, b) => b.LastModified - a.LastModified))
+        .map(item => s3.getObject({
+            Bucket: this.config.bucket,
+            Key: item.Key
+        }).promise()
+             .then(msg => {
+                 return simpleParser(msg.Body);
+             })
+             .then(parsed => {
+                 parsed.key = Buffer.from(item.Key).toString('base64');
+                 return parsed;
+             })
+            ).then(emails => {
+                this.emails = emails;
+            }).catch(e => {
+                this.error = e;
+            });
+}
+
 module.exports = {
     name: 'EmailList',
     data: function () {
@@ -33,40 +66,27 @@ module.exports = {
             emails: []
         }
     },
+    computed: {
+        config: function () {
+            return this.$store.state.config;
+        }
+    },
     methods: {
         openEmail: function (e) {
             this.$router.push({ path: `/inbox/${e.key}` });
-        }
+        },
+        loadEmails
     },
     created: function () {
-        AWS.config.accessKeyId = this.$root.aws_access_key_id;
-        AWS.config.secretAccessKey = this.$root.aws_secret_access_key;
-
-        const s3 = new AWS.S3({ region: this.$root.aws_region });
-
-        s3.listObjectsV2({
-            Bucket: this.$root.bucket
-        }).promise()
-            .then(r => {
-                this.emails = [];
-                return r.Contents;
-            })
-            .then(r => r.sort((a, b) => b.LastModified - a.LastModified))
-            .map(item => s3.getObject({
-                Bucket: this.$root.bucket,
-                Key: item.Key
-            }).promise()
-                 .then(msg => {
-                     return simpleParser(msg.Body);
-                 })
-                 .then(parsed => {
-                     parsed.key = Buffer.from(item.Key).toString('base64');
-                     return parsed;
-                 })
-                ).then(emails => {
-                    this.emails = emails;
-                });
-    }
+        if (this.config) {
+            this.loadEmails();
+        }
+    },
+    watch: {
+        config: function (val) {
+            this.loadEmails();
+        }
+    },
 }
 </script>
 
