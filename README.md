@@ -22,10 +22,13 @@ IAM policy granting read access:
             "Sid": "AllowBucketRead",
             "Effect": "Allow",
             "Action": [
-                "s3:getObject",
-                "s3:listBucket"
+                "s3:listBucket",
+                "s3:getObject"
             ],
-            "Resource": "arn:aws:s3:::<your_bucket_name>"
+            "Resource": [
+                "arn:aws:s3:::<your_bucket_name>",
+                "arn:aws:s3:::<your_bucket_name>/*"
+            ]
         }
     ]
 }
