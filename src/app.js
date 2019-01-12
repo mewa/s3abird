@@ -10,7 +10,6 @@ Vue.use(VueRouter);
 Vue.use(Vuex);
 
 const router = new VueRouter({
-    mode: 'history',
     routes: [
         { path: '/', component: EmailList },
         { path: '/inbox', component: EmailList },
