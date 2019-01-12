@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mewa/s3abird.svg?branch=master)](https://travis-ci.org/mewa/s3abird)
+
 # What is s3abird?
 
 It's a webmail client for viewing emails stored on AWS S3 buckets.
