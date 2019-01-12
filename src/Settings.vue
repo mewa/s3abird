@@ -22,7 +22,7 @@ module.exports = {
     name: 'Settings',
     data: function () {
         return {
-            config: this.$store.state.config
+            config: this.$store.state.config || {}
         };
     },
     methods: {
