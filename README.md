@@ -6,7 +6,7 @@ The purpose of this project is to give an easy interface to browse
 through emails received via AWS SES and stored on S3 buckets, although
 it will work on any buckets containing raw emails.
 
-# Set up
+# Setup
 
 There are several steps required to make _s3abird_ work.
 * creating an S3 bucket
