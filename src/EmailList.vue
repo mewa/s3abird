@@ -1,5 +1,8 @@
 <template>
 <div>
+  <div class="alert alert-danger" v-if="error">
+    Error: {{ error }}
+  </div>
   <table class="table table-hover table-striped table-sm">
     <thead>
       <tr>
@@ -63,7 +66,8 @@ module.exports = {
     name: 'EmailList',
     data: function () {
         return {
-            emails: []
+            emails: [],
+            error: null
         }
     },
     computed: {
