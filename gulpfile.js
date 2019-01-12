@@ -54,7 +54,8 @@ const sass = () => {
 const copyHtml = () => {
     return gulp.src('./static/**/*.html')
         .pipe(mustache({
-            site_base: process.env.SITE_BASE || '/'
+            site_base: process.env.SITE_BASE || '/',
+            ga: process.env.GA_TRACKING_ID
         }))
         .pipe(gulp.dest(OUTPUT));
 };
