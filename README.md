@@ -13,6 +13,24 @@ There are several steps required to make _s3abird_ work.
 * creating credentials that have read access to this bucket
 * setting proper CORS policy
 
+IAM policy granting read access:
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowBucketRead",
+            "Effect": "Allow",
+            "Action": [
+                "s3:getObject",
+                "s3:listBucket"
+            ],
+            "Resource": "arn:aws:s3:::<your_bucket_name>"
+        }
+    ]
+}
+```
+
 A sufficient CORS policy can look like this:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
