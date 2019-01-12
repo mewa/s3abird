@@ -19,7 +19,7 @@
 <script>
 const AWS = require('aws-sdk');
 const Promise = require('bluebird');
-const simpleParser = require('mailparser').simpleParser;
+const parser = require('./parser.js');
 
 AWS.config.setPromisesDependency(Promise);
 
@@ -42,7 +42,7 @@ function loadEmails() {
             Key: item.Key
         }).promise()
              .then(msg => {
-                 return simpleParser(msg.Body);
+                 return parser(msg.Body);
              })
              .then(parsed => {
                  parsed.key = Buffer.from(item.Key).toString('base64');

@@ -21,7 +21,7 @@
 
 <script>
 const AWS = require('aws-sdk');
-const simpleParser = require('mailparser').simpleParser;
+const parser = require('./parser.js');
 
 module.exports = {
     name: 'Email',
@@ -55,7 +55,7 @@ module.exports = {
             Key: this.key
         }).promise()
             .then(msg => {
-                return simpleParser(msg.Body);
+                return parser(msg.Body);
             })
             .then(parsed => {
                 this.email = parsed;
