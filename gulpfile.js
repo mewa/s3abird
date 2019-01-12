@@ -7,6 +7,7 @@ var Sass = require('gulp-sass');
 var browsersync = require('browser-sync').create();
 var source = require('vinyl-source-stream');
 var historyApiFallback = require('connect-history-api-fallback');
+var mustache = require('gulp-mustache');
 
 const parallel = gulp.parallel;
 const series = gulp.series;
@@ -52,6 +53,9 @@ const sass = () => {
 
 const copyHtml = () => {
     return gulp.src('./static/**/*.html')
+        .pipe(mustache({
+            site_base: process.env.SITE_BASE || '/'
+        }))
         .pipe(gulp.dest(OUTPUT));
 };
 
