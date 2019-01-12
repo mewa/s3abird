@@ -1,5 +1,12 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
 html, body {
     height: 100%;
+    @extend .bg-light;
+}
+
+.navbar-brand {
+    font-family: 'Ubuntu', sans-serif;
 }
