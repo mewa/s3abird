@@ -1,9 +1,11 @@
 <template>
 <div>
   <Settings></Settings>
-  <keep-alive include="EmailList">
-    <router-view></router-view>
-  </keep-alive>
+  <div class="container bg-light my-5 rounded py-4">
+    <keep-alive include="EmailList">
+      <router-view></router-view>
+    </keep-alive>
+  </div>
 </div>
 </template>
 
