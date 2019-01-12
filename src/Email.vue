@@ -23,7 +23,7 @@ module.exports = {
     props: ['messageId'],
     data: function () {
         return {
-            email: null
+            email: this.$store.state.emails.get(this.messageId)
         };
     },
     computed: {
@@ -35,6 +35,11 @@ module.exports = {
         }
     },
     created: function () {
+        if (this.email) {
+            // email already loaded
+            return;
+        }
+
         AWS.config.accessKeyId = this.config.aws_access_key_id;
         AWS.config.secretAccessKey = this.config.aws_secret_access_key;
 

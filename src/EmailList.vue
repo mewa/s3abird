@@ -88,6 +88,9 @@ module.exports = {
     watch: {
         config: function (val) {
             this.loadEmails();
+        },
+        emails: function (val) {
+            this.$store.commit('updateEmails', val);
         }
     },
 }

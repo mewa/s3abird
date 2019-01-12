@@ -20,13 +20,24 @@ const router = new VueRouter({
 
 const store = new Vuex.Store({
     state: {
-        config: JSON.parse(localStorage.config || null)
+        config: JSON.parse(localStorage.config || null),
+        emails: new Map
     },
     mutations: {
         updateConfig(state, newConfig) {
             state.config = newConfig;
 
             localStorage.config = JSON.stringify(newConfig);
+        },
+        updateEmails(state, emails) {
+            const map = new Map;
+            emails.forEach(email => {
+                map.set(email.key, email);
+            });
+            state.emails = map;
+        },
+        updateEmail(state, email) {
+            state.emails.set(email.key, email);
         }
     }
 });
