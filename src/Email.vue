@@ -1,5 +1,6 @@
 <template>
 <div v-if="email">
+  <h4>{{ email.subject }}</h4>
   <table class="addr">
     <tbody>
       <tr>
