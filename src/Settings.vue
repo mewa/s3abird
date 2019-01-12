@@ -10,7 +10,7 @@
       <input class="form-control my-1 mr-sm-2" placeholder="AWS Region" aria-label="AWS Region" v-model="config.aws_region">
       <input class="form-control my-1 mr-sm-2" placeholder="S3 Bucket" aria-label="S3 Bucket" v-model="config.bucket">
       <input class="form-control my-1 mr-sm-2" type="password" placeholder="AWS Access Key Id" aria-label="AWS Access Key Id" v-model="config.aws_access_key_id">
-      <input class="form-control my-1 mr-sm-2" type="password" placeholder="AWS Access Key Id" aria-label="AWS Secret Access Key" v-model="config.aws_secret_access_key">
+      <input class="form-control my-1 mr-sm-2" type="password" placeholder="AWS Secret Access Key" aria-label="AWS Secret Access Key" v-model="config.aws_secret_access_key">
       <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Save config</button>
     </form>
   </div>
