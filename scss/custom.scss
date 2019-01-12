@@ -2,9 +2,12 @@
 
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 
+// light-blue 200
+$bg-color: #81D4FA;
+
 html, body {
     height: 100%;
-    @extend .bg-light;
+    background-color: $bg-color;
 }
 
 .navbar-brand {
