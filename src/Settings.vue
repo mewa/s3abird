@@ -22,12 +22,12 @@ module.exports = {
     name: 'Settings',
     data: function () {
         return {
-            config: { ...this.$store.state.config }
+            config: this.$store.state.config
         };
     },
     methods: {
         updateConfig: function () {
-            this.$store.commit('updateConfig', this.config);
+            this.$store.commit('updateConfig', { ...this.config });
         }
     },
 };
