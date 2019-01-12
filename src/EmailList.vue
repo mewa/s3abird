@@ -3,7 +3,7 @@
   <div class="alert alert-danger" v-if="error">
     Error: {{ error }}
   </div>
-  <table class="table table-hover table-striped table-sm">
+  <table class="table table-hover table-sm table-responsive-md">
     <thead>
       <tr>
         <th scope="col">Date</th>
@@ -103,7 +103,7 @@ module.exports = {
     }
 
     th:last-child {
-        width: 70%;
+        width: 60%;
     }
 }
 </style>
