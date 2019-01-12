@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - "lts/*"
+
+before_script:
+  - npm install -g gulp-cli
+
+script: gulp
+
+deploy:
+  provider: pages
+  local-dir: public
+  skip-cleanup: true
+  github-token: $GITHUB_API_TOKEN
+  keep-history: true
+  on:
+    branch: master
