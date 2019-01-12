@@ -9,10 +9,13 @@
       <tr>
         <td scope="row"><span class="text-secondary">to</span> {{ email.to.text }}</td>
       </tr>
+      <tr>
+        <td scope="row">
+          <div class="my-2" v-html="email.html || email.textAsHtml"></div>
+        </td>
+      </tr>
     </tbody>
   </table>
-  <hr />
-  <div class="my-2" v-html="email.html || email.textAsHtml"></div>
 </div>
 </template>
 
