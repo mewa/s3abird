@@ -1,6 +1,6 @@
 <template>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">s3abird</a>
+  <router-link class="navbar-brand" to="/">s3abird</router-link>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSettings" aria-controls="navbarSettings" aria-expanded="false" aria-label="Toggle settings">
     <span class="navbar-toggler-icon"></span>
   </button>
