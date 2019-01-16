@@ -4,6 +4,8 @@
   <div class="alert alert-danger" v-if="error">
     Error: {{ error }}
   </div>
+  <h5 class="text-secondary" v-if="!emails">Loading...</h5>
+  <h5 class="text-secondary" v-if="emails && emails.length == 0">There's nothing in here</h5>
   <table class="table table-hover table-responsive-lg">
     <tbody>
       <tr v-for="email in emails" @click="openEmail(email)">
@@ -30,7 +32,7 @@ function loadEmails() {
     const s3 = new AWS.S3({ region: this.config.aws_region });
 
     this.error = null;
-    this.emails = [];
+    this.emails = null;
 
     s3.listObjectsV2({
         Bucket: this.config.bucket,
@@ -85,7 +87,9 @@ module.exports = {
             this.loadEmails();
         },
         emails: function (val) {
-            this.$store.commit('updateEmails', val);
+            if (val) {
+                this.$store.commit('updateEmails', val);
+            }
         }
     },
 }
