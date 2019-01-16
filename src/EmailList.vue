@@ -10,7 +10,7 @@
     <tbody>
       <tr v-for="email in emails" @click="openEmail(email)">
         <td class="text-truncate" style="max-width: 300px;">{{ email.from.text }}</td>
-        <td class="text-truncate" style="width: 100%; min-width: 300px; max-width: 1px;">{{ email.subject || '(no subject)' }}</td>
+        <td class="text-truncate" style="width: 100%; min-width: 300px; max-width: 1px;">{{ email.subject || '(no subject)' }}<span class="text-secondary">&nbsp;-&nbsp;{{ email.text }}</span></td>
         <td class="text-nowrap text-muted text-right"><small>{{ email.date.toLocaleString() }}</small></td>
       </tr>
     </tbody>
