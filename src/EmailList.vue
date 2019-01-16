@@ -33,7 +33,8 @@ function loadEmails() {
     this.emails = [];
 
     s3.listObjectsV2({
-        Bucket: this.config.bucket
+        Bucket: this.config.bucket,
+        Prefix: this.config.prefix
     }).promise()
         .then(r => r.Contents)
         .then(r => r.sort((a, b) => b.LastModified - a.LastModified))

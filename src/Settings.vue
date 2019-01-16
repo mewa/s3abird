@@ -8,7 +8,7 @@
   <div class="collapse navbar-collapse" id="navbarSettings">
     <form class="form-inline ml-auto my-2 my-lg-0" @submit.prevent="updateConfig">
       <input class="form-control my-1 mr-sm-2" placeholder="AWS Region" aria-label="AWS Region" v-model="config.aws_region">
-      <input class="form-control my-1 mr-sm-2" placeholder="S3 Bucket" aria-label="S3 Bucket" v-model="config.bucket">
+      <input class="form-control my-1 mr-sm-2" placeholder="S3 Bucket" aria-label="S3 Bucket" v-model="bucket">
       <input class="form-control my-1 mr-sm-2" type="password" placeholder="AWS Access Key Id" aria-label="AWS Access Key Id" v-model="config.aws_access_key_id">
       <input class="form-control my-1 mr-sm-2" type="password" placeholder="AWS Secret Access Key" aria-label="AWS Secret Access Key" v-model="config.aws_secret_access_key">
       <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Save config</button>
@@ -24,6 +24,20 @@ module.exports = {
         return {
             config: this.$store.state.config || {}
         };
+    },
+    computed: {
+        bucket: {
+            get() {
+                if (this.config.prefix)
+                    return `${this.config.bucket}/${this.config.prefix}`;
+                return this.config.bucket;
+            },
+            set(val) {
+                [bucket, prefix] = val.split(/\/(.+)/);
+                this.config.bucket = bucket;
+                this.config.prefix = prefix;
+            }
+        }
     },
     methods: {
         updateConfig: function () {
