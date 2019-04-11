@@ -6,6 +6,8 @@ const App = require('./App.vue');
 const Email = require('./Email.vue');
 const EmailList = require('./EmailList.vue');
 
+const Labels = require('./labels.js');
+
 Vue.use(VueRouter);
 Vue.use(Vuex);
 
@@ -20,7 +22,22 @@ const router = new VueRouter({
 const store = new Vuex.Store({
     state: {
         config: JSON.parse(localStorage.config || null),
-        emails: new Map
+        emails: new Map,
+        labels: [],
+    },
+    getters: {
+        emails: state => {
+            let emails = [];
+            state.emails.forEach(v => {
+                emails.push(v);
+            });
+
+            state.labels.forEach(label => {
+                emails = emails.filter(label.f);
+            });
+
+            return emails;
+        }
     },
     mutations: {
         updateConfig(state, newConfig) {
@@ -37,6 +54,12 @@ const store = new Vuex.Store({
         },
         updateEmail(state, email) {
             state.emails.set(email.key, email);
+        },
+        addLabel(state, label) {
+            state.labels.push(label);
+        },
+        removeLabel(state, label) {
+            state.labels = state.labels.filter(l => l != label);
         }
     }
 });

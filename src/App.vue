@@ -1,15 +1,23 @@
 <template>
 <div>
   <Settings></Settings>
-  <div class="container bg-light mt-md-5 my-2 py-2 rounded">
-    <keep-alive include="EmailList">
-      <router-view></router-view>
-    </keep-alive>
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="mt-2 col col-sm-9 col-md-10">
+        <div class="bg-light rounded px-3 py-2">
+          <keep-alive include="EmailList">
+            <router-view></router-view>
+          </keep-alive>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <footer class="container d-flex justify-content-between my-2">
+        <span>Made with <i class="fas fa-heart"></i> by <a href="https://marcinchmiel.com">Marcin Chmiel</a></span>
+        <a href="https://github.com/mewa/s3abird"><i class="fab fa-github"></i> Contribute</a>
+      </footer>
+    </div>
   </div>
-  <footer class="container d-flex justify-content-between my-2">
-    <span>Made with <i class="fas fa-heart"></i> by <a href="https://marcinchmiel.com">Marcin Chmiel</a></span>
-    <a href="https://github.com/mewa/s3abird"><i class="fab fa-github"></i> Contribute</a>
-  </footer>
 </div>
 </template>
 

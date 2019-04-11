@@ -1,11 +1,14 @@
 <template>
 <div>
   <h4>Inbox</h4>
+
+  <Filters class="mb-3"></Filters>
+
   <div class="alert alert-danger" v-if="error">
     Error: {{ error }}
   </div>
-  <h5 class="text-secondary" v-if="!emails">Loading...</h5>
-  <h5 class="text-secondary" v-if="emails && emails.length == 0">There's nothing in here</h5>
+  <h5 class="text-secondary" v-if="!emails || loading">Loading...</h5>
+  <h5 class="text-secondary" v-if="!loading && emails && emails.length == 0">There's nothing in here</h5>
   <table class="table table-hover table-responsive-lg">
     <tbody>
       <tr v-for="email in emails" @click="openEmail(email)">
@@ -25,6 +28,8 @@ const parser = require('./parser.js');
 
 AWS.config.setPromisesDependency(Promise);
 
+const Filters = require('./Filters.vue');
+
 function loadEmails() {
     AWS.config.accessKeyId = this.config.aws_access_key_id;
     AWS.config.secretAccessKey = this.config.aws_secret_access_key;
@@ -32,7 +37,7 @@ function loadEmails() {
     const s3 = new AWS.S3({ region: this.config.aws_region });
 
     this.error = null;
-    this.emails = null;
+    this.loading = true;
 
     s3.listObjectsV2({
         Bucket: this.config.bucket,
@@ -52,8 +57,10 @@ function loadEmails() {
                  return parsed;
              })
             ).then(emails => {
-                this.emails = emails;
+                this.loading = false;
+                this.$store.commit('updateEmails', emails);
             }).catch(e => {
+                this.loading = false;
                 this.error = e;
             });
 }
@@ -62,14 +69,16 @@ module.exports = {
     name: 'EmailList',
     data: function () {
         return {
-            emails: [],
             error: null
         }
     },
     computed: {
         config: function () {
             return this.$store.state.config;
-        }
+        },
+        emails: function () {
+            return this.$store.getters.emails;
+        },
     },
     methods: {
         openEmail: function (e) {
@@ -85,13 +94,11 @@ module.exports = {
     watch: {
         config: function (val) {
             this.loadEmails();
-        },
-        emails: function (val) {
-            if (val) {
-                this.$store.commit('updateEmails', val);
-            }
         }
     },
+    components: {
+        Filters
+    }
 }
 </script>
 
@@ -101,10 +108,6 @@ module.exports = {
 
     tbody tr {
         cursor: pointer;
-
-        .fill {
-            width: auto;
-        }
     }
 }
 </style>
