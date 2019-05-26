@@ -48,6 +48,9 @@ A sufficient CORS policy can look like this:
 </CORSConfiguration>
 ```
 
+When building locally, you can bake in your own credentials [here](https://github.com/mewa/s3abird/blob/master/src/app.js#L22) and remove [Settings component](https://github.com/mewa/s3abird/blob/master/src/Settings.vue).
+
+
 Besides configuring an S3 bucket for reads you will probably want to
 [configure
 SES](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-getting-started.html)
