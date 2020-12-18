@@ -12,7 +12,7 @@
     "aws-sdk": "^2.386.0",
     "bluebird": "^3.5.3",
     "bootstrap": "^4.3.0",
-    "dompurify": "^1.0.8",
+    "dompurify": "^2.0.17",
     "mailparser": "^2.4.3",
     "vue": "^2.5.21",
     "vue-router": "^3.0.2",
